@@ -1,0 +1,17 @@
+[
+    {
+        "id":1,
+        "description":"wash dishes",
+        "done": true
+    },
+    {
+        "id":2,
+        "description":"walk with dog",
+        "done": false
+    },
+    {
+        "id":3,
+        "description":"homework",
+        "done": true
+    }
+]
