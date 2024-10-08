@@ -4,20 +4,19 @@ import style from './Form.module.css'
 
 export class Form extends Component {
 
-    saveDescription = () => {
-        console.log();
-    }
 
 
 
     render(){
-
+        console.log(this.props.onSubmit);
+        
         return(
             <div className={style.modalWindow}>
-                <form onSubmit={this.saveDescription} className={style.form}>
-                    <input className={style.item}/>
-                    <input className={style.item}/>
-                    <button>Додати</button>
+                <form onSubmit={this.props.onSubmit} className={style.form}>
+                    <input className={style.item} name='id'/>
+                    <input className={style.item} name='description'/>
+                    <input className={style.item} name='isdone'/>
+                    <button type='submit'>Додати</button>
                 </form>
             </div>
         )
