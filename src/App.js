@@ -17,16 +17,14 @@ export class App extends Component {
     event.target.classList.add("form_active")
   }
 
-  saveDescription = (event) => {
+  saveDescription = (id, description, isdone) => {
 
-    event.preventDefault()
-
-    const id = event.target.elements.id.value
-    const description = event.target.elements.description.value
-    const isdone = event.target.elements.isdone.value
+    // const id = event.target.elements.id.value
+    // const description = event.target.elements.description.value
+    // const isdone = event.target.elements.isdone.value
 
     const task = {id: id, description:description, done: isdone}
-
+ 
     
     this.setState(({tasks}) =>{ 
 
