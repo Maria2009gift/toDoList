@@ -29,7 +29,7 @@ export class App extends Component {
 
     
     this.setState(({tasks}) =>{ 
-      // console.log(tasks);
+
       return {
         tasks: [...tasks, task]
       }
