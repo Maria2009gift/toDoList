@@ -8,22 +8,27 @@ import { Form } from './components/Form/Form';
 export class App extends Component {
 
   state = {
-    tasks: []
+    tasks: [
+      { "id": "id-1", "description": "Вивчити основи React", "isdone": true },
+      { "id": "id-2", "description": "Розібратися з React Router", "isdone": false },
+      { "id": "id-3", "description": "Пережити Redux", "isdone": false }
+    ]
   }
 
-  showForm = (event) => {
-    console.log(event.target);
+  // showForm = (event) => {
+  //   console.log(event.target);
     
-    event.target.classList.add("form_active")
+  //   event.target.classList.add("form_active")
+  // }
+
+  deleteToDo = (id) => {
+    const newList = this.state.tasks.filter(task => task.id !== id)
+    this.setState({tasks : newList})
   }
 
-  saveDescription = (id, description, isdone) => {
+  addToDo = (description) => {
 
-    // const id = event.target.elements.id.value
-    // const description = event.target.elements.description.value
-    // const isdone = event.target.elements.isdone.value
-
-    const task = {id: id, description:description, done: isdone}
+    const task = {id:Date.now , description, isdone: false}
  
     
     this.setState(({tasks}) =>{ 
@@ -46,9 +51,9 @@ export class App extends Component {
     <>
       <h1>Список ваших справ на тиждень</h1>
       <p>Кількість ваших справ: </p><span>{tasks.length}</span>
-      <ToDoList data={tasks}/>
+      <ToDoList data={tasks} deleteing={this.deleteToDo}/>
       <button onClick={this.showForm}>Додати завдання</button>
-      <Form onSubmit={this.saveDescription}/>
+      <Form onSubmit={this.addToDo}/>
 
     </>
   );

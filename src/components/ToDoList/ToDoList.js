@@ -8,6 +8,8 @@ export class ToDoList extends Component {
         
     }
 
+    
+
     render(){
         
         return(
@@ -17,6 +19,7 @@ export class ToDoList extends Component {
                         <li key={task.id}>
                             <p>{task.description}</p>
                             <input type='checkbox'></input>
+                            <button type='button' onClick={() => {this.props.deleteing(task.id)}}>Delete</button>
                         </li>
                     )
                 })}
