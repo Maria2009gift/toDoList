@@ -16,6 +16,7 @@ export class Form extends Component {
     handleSubmit = (event) =>{
         event.preventDefault()
         this.props.onSubmit(this.state.description)
+        this.setState({description: ""})
     }
     render() {
         console.log(this.props.onSubmit);

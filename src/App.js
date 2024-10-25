@@ -1,4 +1,4 @@
-
+import {nanoid} from 'nanoid'
 import './App.css';
 // import todosDate from './todos.json'
 import React, { Component } from 'react'
@@ -12,7 +12,8 @@ export class App extends Component {
       { "id": "id-1", "description": "Вивчити основи React", "isdone": true },
       { "id": "id-2", "description": "Розібратися з React Router", "isdone": false },
       { "id": "id-3", "description": "Пережити Redux", "isdone": false }
-    ]
+    ],
+    filter: '',
   }
 
   // showForm = (event) => {
@@ -28,7 +29,7 @@ export class App extends Component {
 
   addToDo = (description) => {
 
-    const task = { id: Date.now, description, isdone: false }
+    const task = { id: nanoid(), description, isdone: false }
 
 
     this.setState(({ tasks }) => {
@@ -70,10 +71,17 @@ export class App extends Component {
       return total
     }, {complete: 0, notcomplete: 0})
   }
-
+  handleFilter = (event)=>{
+    this.setState({filter: event.currentTarget.value})
+  }
+  getVisibleTasks = () =>{
+    
+    return this.state.tasks.filter((task) => task.description.toLowerCase().includes(this.state.filter.toLowerCase()))
+  }
   render() {
-    const { tasks } = this.state
+    const { tasks, filter } = this.state
     const calculate = this.calculateTasks()
+    const visibleTasks = this.getVisibleTasks()
 
     return (
       <>
@@ -81,7 +89,8 @@ export class App extends Component {
         <p>Кількість ваших справ: </p><span>{tasks.length}</span>
         <p>Кількість виконаних справ: {calculate.complete}</p>
         <p>Кількість запланованих справ: {calculate.notcomplete}</p>
-        <ToDoList data={tasks} deleteing={this.deleteToDo} toggleIsDone={this.toggleIsDone} />
+        <input placeholder='Знайти елемент' onChange={this.handleFilter}  value={filter}></input>
+        <ToDoList data={visibleTasks} deleteing={this.deleteToDo} toggleIsDone={this.toggleIsDone} />
         <button onClick={this.showForm}>Додати завдання</button>
         <Form onSubmit={this.addToDo} />
 
