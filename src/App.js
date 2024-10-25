@@ -59,14 +59,28 @@ export class App extends Component {
 
     )
   }
+
+  calculateTasks = () => {
+    return this.state.tasks.reduce((total, task) => {
+      if (task.isdone) {
+        total.complete += 1
+      } else {
+        total.notcomplete += 1
+      }
+      return total
+    }, {complete: 0, notcomplete: 0})
+  }
+
   render() {
     const { tasks } = this.state
+    const calculate = this.calculateTasks()
 
     return (
       <>
         <h1>Список ваших справ на тиждень</h1>
         <p>Кількість ваших справ: </p><span>{tasks.length}</span>
-
+        <p>Кількість виконаних справ: {calculate.complete}</p>
+        <p>Кількість запланованих справ: {calculate.notcomplete}</p>
         <ToDoList data={tasks} deleteing={this.deleteToDo} toggleIsDone={this.toggleIsDone} />
         <button onClick={this.showForm}>Додати завдання</button>
         <Form onSubmit={this.addToDo} />
@@ -78,3 +92,7 @@ export class App extends Component {
 
 
 export default App;
+
+
+
+
