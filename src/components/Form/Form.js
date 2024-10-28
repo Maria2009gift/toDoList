@@ -24,12 +24,9 @@ export class Form extends Component {
         return (
             <div className={style.modalWindow}>
                 <form onSubmit={this.handleSubmit} className={style.form}>
-
                     <label>
-                        Введіть опис завдання
-                        <input className={style.item} value={this.state.description} name='description' onChange={this.handleChange} />
+                        <input className={style.item} placeholder='Введіть опис завдання' value={this.state.description} name='description' onChange={this.handleChange} />
                     </label>
-
                     <button type='submit'>Додати</button>
                 </form>
             </div>
