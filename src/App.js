@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import { ToDoList } from './components/ToDoList/ToDoList';
 import { Form } from './components/Form/Form';
 import { Statistics } from './components/Statistics/Statistics';
+import { Modal } from './components/Modal/Modal'
 
 export class App extends Component {
 
@@ -15,6 +16,7 @@ export class App extends Component {
       { "id": "id-3", "description": "Пережити Redux", "isdone": false }
     ],
     filter: '',
+    modalVisibility: false,
   }
 
   // showForm = (event) => {
@@ -81,7 +83,9 @@ export class App extends Component {
     
     return this.state.tasks.filter((task) => task.description.toLowerCase().includes(this.state.filter.toLowerCase()))
   }
-  
+  toggleModal = () =>{
+    this.setState((prevState)=> ({modalVisibility: !prevState.modalVisibility}))
+  }
   render() {
     const { tasks, filter } = this.state
     const calculate = this.calculateTasks()
@@ -91,10 +95,13 @@ export class App extends Component {
       <>
         <h1>Список ваших справ на тиждень</h1>
         <Statistics lenght={tasks.length} complete={calculate.complete} notcomplete={calculate.notcomplete}/>
+        <button onClick={this.toggleModal}>Створити  нове завдання</button>
+        {this.state.modalVisibility && <Modal >
         <Form onSubmit={this.addToDo} />
+        </Modal>}
         <input placeholder='Знайти елемент' onChange={this.handleFilter}  value={filter} className={style.input}/>
         <ToDoList data={visibleTasks} deleteing={this.deleteToDo} toggleIsDone={this.toggleIsDone} /> 
-
+      
       </>
     );
   }
