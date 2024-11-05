@@ -86,6 +86,7 @@ export class App extends Component {
   toggleModal = () =>{
     this.setState((prevState)=> ({modalVisibility: !prevState.modalVisibility}))
   }
+
   render() {
     const { tasks, filter } = this.state
     const calculate = this.calculateTasks()
@@ -96,8 +97,9 @@ export class App extends Component {
         <h1>Список ваших справ на тиждень</h1>
         <Statistics lenght={tasks.length} complete={calculate.complete} notcomplete={calculate.notcomplete}/>
         <button onClick={this.toggleModal}>Створити  нове завдання</button>
-        {this.state.modalVisibility && <Modal >
-        <Form onSubmit={this.addToDo} />
+        {this.state.modalVisibility && <Modal closeModal={this.toggleModal}>
+        <Form onSubmit={this.addToDo} closeModal={this.toggleModal}/>
+        <button onClick={this.toggleModal}>Закрити модалку</button>
         </Modal>}
         <input placeholder='Знайти елемент' onChange={this.handleFilter}  value={filter} className={style.input}/>
         <ToDoList data={visibleTasks} deleteing={this.deleteToDo} toggleIsDone={this.toggleIsDone} /> 

@@ -17,6 +17,7 @@ export class Form extends Component {
         event.preventDefault()
         this.props.onSubmit(this.state.description)
         this.setState({description: ""})
+        this.props.closeModal()
     }
     render() {
         console.log(this.props.onSubmit);
