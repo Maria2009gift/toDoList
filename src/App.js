@@ -48,6 +48,11 @@ export class App extends Component {
     return this.state.tasks
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.tasks !== this.state.tasks)
+      window.localStorage.setItem("tasks", JSON.stringify(this.state.tasks))
+  }
+
   toggleIsDone = (id) => {
     this.setState((prevState) => {
       return ({
