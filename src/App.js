@@ -10,20 +10,12 @@ import { Modal } from './components/Modal/Modal'
 export class App extends Component {
 
   state = {
-    tasks: [
-      { "id": "id-1", "description": "Вивчити основи React", "isdone": true },
-      { "id": "id-2", "description": "Розібратися з React Router", "isdone": false },
-      { "id": "id-3", "description": "Пережити Redux", "isdone": false }
-    ],
+    tasks: [],
     filter: '',
     modalVisibility: false,
   }
 
-  // showForm = (event) => {
-  //   console.log(event.target);
 
-  //   event.target.classList.add("form_active")
-  // }
 
   deleteToDo = (id) => {
     const newList = this.state.tasks.filter(task => task.id !== id)
@@ -46,6 +38,13 @@ export class App extends Component {
 
 
     return this.state.tasks
+  }
+
+  componentDidMount() {
+    const tasksFromLocalStorage = window.localStorage.getItem("tasks")
+    if (tasksFromLocalStorage) {     
+      this.setState({tasks: JSON.parse(tasksFromLocalStorage)})
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -108,7 +107,6 @@ export class App extends Component {
         </Modal>}
         <input placeholder='Знайти елемент' onChange={this.handleFilter}  value={filter} className={style.input}/>
         <ToDoList data={visibleTasks} deleteing={this.deleteToDo} toggleIsDone={this.toggleIsDone} /> 
-      
       </>
     );
   }

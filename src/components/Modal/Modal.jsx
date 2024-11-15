@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import style from "./Modal.module.css"
+import { Timer } from '../Timer/Timer'
 
 export class Modal extends Component {
+
+    state = {
+        timerTime: null
+    }
 
     handleModal = (event) => {
         if (event.code === "Escape") {
@@ -28,6 +33,7 @@ export class Modal extends Component {
             <div onClick={this.closeModal} className={style.backdrop}>
                 <div className={style.modal}>
                     {this.props.children}
+                    <Timer/>
                 </div>
             </div>
         )
