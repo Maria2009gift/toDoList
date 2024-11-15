@@ -12,7 +12,7 @@ export class Timer extends Component {
         this.intervalId = setInterval(() => {
             
             this.setState((prevState) => ({timerTime: prevState.timerTime+=1}))
-            console.log(this.state.timerTime);
+            console.log(this.state.timerTime + " секунд");
             
         }, 1000);
     }
